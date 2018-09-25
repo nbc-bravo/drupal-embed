@@ -140,6 +140,13 @@ class EmbedButtonForm extends EntityForm {
       $form['icon_file']['#default_value'] = ['target_id' => $file->id()];
     }
 
+    $form['icon_path'] = [
+      '#title' => $this->t('Button icon path'),
+      '#type' => 'textfield',
+      '#description' => $this->t('Icon path for the button to be shown in CKEditor toolbar. Use this for a fixed icon path if not using the icon upload.'),
+      '#default_value' => $button->getIconPath(),
+    ];
+
     return $form;
   }
 
@@ -189,6 +196,13 @@ class EmbedButtonForm extends EntityForm {
     }
     else {
       $button->set('icon_uuid', NULL);
+    }
+
+    if ($icon_path = $form_state->getValue('icon_path')) {
+      $button->set('icon_path', $icon_path);
+    }
+    else {
+      $button->set('icon_path', NULL);
     }
 
     $status = $button->save();

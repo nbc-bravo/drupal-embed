@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * Update config for embed buttons.
+ */
+function embed_update_8001() {
+  $config_factory = \Drupal::configFactory();
+
+  foreach ($config_factory->listAll('embed.button.') as $embed_button_config_name) {
+    /* @var \Drupal\embed\EmbedButtonInterface $embed_button */
+    $embed_button = $config_factory->getEditable($embed_button_config_name);
+
+    if (!$embed_button->get('icon_path')) {
+      $embed_button->set('icon_path', NULL);
+    }
+
+    $embed_button->save();
+  }
+}

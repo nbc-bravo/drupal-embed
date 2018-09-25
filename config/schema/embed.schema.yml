@@ -29,6 +29,9 @@ embed.button.*:
     icon_uuid:
       type: string
       label: 'Button icon UUID'
+    icon_path:
+      type: string
+      label: 'Button icon path'
 
 embed.embed_type_settings.*:
   type: mapping

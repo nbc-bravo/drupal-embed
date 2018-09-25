@@ -38,6 +38,7 @@ use Drupal\embed\EmbedButtonInterface;
  *     "type_id",
  *     "type_settings",
  *     "icon_uuid",
+ *     "icon_path",
  *   }
  * )
  */
@@ -83,6 +84,13 @@ class EmbedButton extends ConfigEntityBase implements EmbedButtonInterface {
   public $icon_uuid;
 
   /**
+   * Path to the button's icon file.
+   *
+   * @var string
+   */
+  public $icon_path;
+
+  /**
    * {@inheritdoc}
    */
   public function getTypeId() {
@@ -122,9 +130,19 @@ class EmbedButton extends ConfigEntityBase implements EmbedButtonInterface {
   /**
    * {@inheritdoc}
    */
+  public function getIconPath() {
+    return $this->icon_path;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function getIconUrl() {
     if ($image = $this->getIconFile()) {
       return file_create_url($image->getFileUri());
+    }
+    elseif (!empty($this->icon_path)) {
+      return file_create_url($this->icon_path);
     }
     else {
       return $this->getTypePlugin()->getDefaultIconUrl();

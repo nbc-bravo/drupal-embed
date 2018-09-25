@@ -63,6 +63,14 @@ interface EmbedButtonInterface extends ConfigEntityInterface {
   public function getIconFile();
 
   /**
+   * Returns the button's icon file path.
+   *
+   * @return string|null
+   *   The file path of the button icon.
+   */
+  public function getIconPath();
+
+  /**
    * Returns the URL of the button's icon.
    *
    * If no icon file is associated with this Embed Button entity, the embed type
